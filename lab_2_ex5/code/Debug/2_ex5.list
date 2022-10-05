@@ -763,13 +763,13 @@ void digital_clock(){
  8000654:	f44f 7100 	mov.w	r1, #512	; 0x200
  8000658:	48a2      	ldr	r0, [pc, #648]	; (80008e4 <digital_clock+0x678>)
  800065a:	f001 f907 	bl	800186c <HAL_GPIO_WritePin>
-	 		HAL_GPIO_WritePin(SEG2_C_GPIO_Port, SEG2_C_Pin, RESET);
- 800065e:	2200      	movs	r2, #0
+	 		HAL_GPIO_WritePin(SEG2_C_GPIO_Port, SEG2_C_Pin, SET);
+ 800065e:	2201      	movs	r2, #1
  8000660:	f44f 6180 	mov.w	r1, #1024	; 0x400
  8000664:	489f      	ldr	r0, [pc, #636]	; (80008e4 <digital_clock+0x678>)
  8000666:	f001 f901 	bl	800186c <HAL_GPIO_WritePin>
-	 		HAL_GPIO_WritePin(SEG2_D_GPIO_Port, SEG2_D_Pin, SET);
- 800066a:	2201      	movs	r2, #1
+	 		HAL_GPIO_WritePin(SEG2_D_GPIO_Port, SEG2_D_Pin, RESET);
+ 800066a:	2200      	movs	r2, #0
  800066c:	f44f 6100 	mov.w	r1, #2048	; 0x800
  8000670:	489c      	ldr	r0, [pc, #624]	; (80008e4 <digital_clock+0x678>)
  8000672:	f001 f8fb 	bl	800186c <HAL_GPIO_WritePin>
