@@ -63,7 +63,7 @@ static void MX_TIM2_Init(void);
   * @brief  The application entry point.
   * @retval int
   */
-	const int MAX_LED_MATRIX = 5;
+const int MAX_LED_MATRIX = 5;
 	int index_led_matrix = 0;
 	int bool=0;
 	unsigned matrix_buffer[8] = {0xFEF7,0xFDEB,0xFBC1,0xF7DD,0xEFDD,0xDFDD,0xBFDD,0x7FDD};
@@ -164,20 +164,20 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  setTimer0(10);
+  setTimer0(70);
   while (1)
   {
     /* USER CODE END WHILE */
 	  if(timer0_flag == 1){
-		  if(index_led_matrix >= MAX_LED_MATRIX){
-			  index_led_matrix=0;
-			  bool+=1;
-			  if(bool > 5) bool =0;
-		  }
-		  updateLEDMatrix(index_led_matrix);
-		  index_led_matrix++;
-		  setTimer0(10);
-	  }
+	 		  if(index_led_matrix >= MAX_LED_MATRIX){
+	 			  index_led_matrix=0;
+	 			  bool+=1;
+	 			  if(bool > 5) bool =0;
+	 		  }
+	 		  updateLEDMatrix(index_led_matrix);
+	 		  index_led_matrix++;
+	 		  setTimer0(100);
+	 	  }
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -237,7 +237,7 @@ static void MX_TIM2_Init(void)
 
   /* USER CODE END TIM2_Init 1 */
   htim2.Instance = TIM2;
-  htim2.Init.Prescaler = 7999;
+  htim2.Init.Prescaler = 799;
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
   htim2.Init.Period = 9;
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;

@@ -72,7 +72,6 @@ const int MAX_LED_MATRIX = 5;
 		case 0:
 			GPIOB->ODR = matrix_buffer[index];
 			break;
-
 		case 1:
 			GPIOB->ODR = matrix_buffer[index];
 			break;
@@ -129,7 +128,7 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  setTimer0(10);
+  setTimer0(50);
 //  set_ULN();
   while (1)
   {
@@ -140,7 +139,7 @@ int main(void)
 		  }
 		  updateLEDMatrix(index_led_matrix);
 		  index_led_matrix++;
-		  setTimer0(10);
+		  setTimer0(40);
 	  }
 
     /* USER CODE BEGIN 3 */
@@ -202,7 +201,7 @@ static void MX_TIM2_Init(void)
 
   /* USER CODE END TIM2_Init 1 */
   htim2.Instance = TIM2;
-  htim2.Init.Prescaler = 7999;
+  htim2.Init.Prescaler = 799;
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
   htim2.Init.Period = 9;
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;

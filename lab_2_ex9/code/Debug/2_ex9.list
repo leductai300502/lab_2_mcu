@@ -110,7 +110,6 @@ const int MAX_LED_MATRIX = 5;
  800018a:	60d3      	str	r3, [r2, #12]
 			break;
  800018c:	e031      	b.n	80001f2 <updateLEDMatrix+0xa6>
-
 		case 1:
 			GPIOB->ODR = matrix_buffer[index];
  800018e:	4a1b      	ldr	r2, [pc, #108]	; (80001fc <updateLEDMatrix+0xb0>)
@@ -223,8 +222,8 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  setTimer0(10);
- 800021e:	200a      	movs	r0, #10
+  setTimer0(50);
+ 800021e:	2032      	movs	r0, #50	; 0x32
  8000220:	f000 f90e 	bl	8000440 <setTimer0>
 //  set_ULN();
   while (1)
@@ -257,8 +256,8 @@ int main(void)
  800024a:	3301      	adds	r3, #1
  800024c:	4a04      	ldr	r2, [pc, #16]	; (8000260 <main+0x5c>)
  800024e:	6013      	str	r3, [r2, #0]
-		  setTimer0(10);
- 8000250:	200a      	movs	r0, #10
+		  setTimer0(40);
+ 8000250:	2028      	movs	r0, #40	; 0x28
  8000252:	f000 f8f5 	bl	8000440 <setTimer0>
 	  if(timer0_flag == 1){
  8000256:	e7e5      	b.n	8000224 <main+0x20>
@@ -390,9 +389,9 @@ static void MX_TIM2_Init(void)
  80002f8:	4b1d      	ldr	r3, [pc, #116]	; (8000370 <MX_TIM2_Init+0x94>)
  80002fa:	f04f 4280 	mov.w	r2, #1073741824	; 0x40000000
  80002fe:	601a      	str	r2, [r3, #0]
-  htim2.Init.Prescaler = 7999;
+  htim2.Init.Prescaler = 799;
  8000300:	4b1b      	ldr	r3, [pc, #108]	; (8000370 <MX_TIM2_Init+0x94>)
- 8000302:	f641 723f 	movw	r2, #7999	; 0x1f3f
+ 8000302:	f240 321f 	movw	r2, #799	; 0x31f
  8000306:	605a      	str	r2, [r3, #4]
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
  8000308:	4b19      	ldr	r3, [pc, #100]	; (8000370 <MX_TIM2_Init+0x94>)

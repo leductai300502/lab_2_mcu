@@ -580,8 +580,8 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  setTimer0(10);
- 8000502:	200a      	movs	r0, #10
+  setTimer0(70);
+ 8000502:	2046      	movs	r0, #70	; 0x46
  8000504:	f000 f91c 	bl	8000740 <setTimer0>
   while (1)
   {
@@ -591,23 +591,23 @@ int main(void)
  800050a:	681b      	ldr	r3, [r3, #0]
  800050c:	2b01      	cmp	r3, #1
  800050e:	d1fb      	bne.n	8000508 <main+0x20>
-		  if(index_led_matrix >= MAX_LED_MATRIX){
+	 		  if(index_led_matrix >= MAX_LED_MATRIX){
  8000510:	4b12      	ldr	r3, [pc, #72]	; (800055c <main+0x74>)
  8000512:	681b      	ldr	r3, [r3, #0]
  8000514:	2205      	movs	r2, #5
  8000516:	4293      	cmp	r3, r2
  8000518:	db0e      	blt.n	8000538 <main+0x50>
-			  index_led_matrix=0;
+	 			  index_led_matrix=0;
  800051a:	4b10      	ldr	r3, [pc, #64]	; (800055c <main+0x74>)
  800051c:	2200      	movs	r2, #0
  800051e:	601a      	str	r2, [r3, #0]
-			  bool+=1;
+	 			  bool+=1;
  8000520:	4b0f      	ldr	r3, [pc, #60]	; (8000560 <main+0x78>)
  8000522:	681b      	ldr	r3, [r3, #0]
  8000524:	3301      	adds	r3, #1
  8000526:	4a0e      	ldr	r2, [pc, #56]	; (8000560 <main+0x78>)
  8000528:	6013      	str	r3, [r2, #0]
-			  if(bool > 5) bool =0;
+	 			  if(bool > 5) bool =0;
  800052a:	4b0d      	ldr	r3, [pc, #52]	; (8000560 <main+0x78>)
  800052c:	681b      	ldr	r3, [r3, #0]
  800052e:	2b05      	cmp	r3, #5
@@ -615,20 +615,20 @@ int main(void)
  8000532:	4b0b      	ldr	r3, [pc, #44]	; (8000560 <main+0x78>)
  8000534:	2200      	movs	r2, #0
  8000536:	601a      	str	r2, [r3, #0]
-		  }
-		  updateLEDMatrix(index_led_matrix);
+	 		  }
+	 		  updateLEDMatrix(index_led_matrix);
  8000538:	4b08      	ldr	r3, [pc, #32]	; (800055c <main+0x74>)
  800053a:	681b      	ldr	r3, [r3, #0]
  800053c:	4618      	mov	r0, r3
  800053e:	f7ff fe05 	bl	800014c <updateLEDMatrix>
-		  index_led_matrix++;
+	 		  index_led_matrix++;
  8000542:	4b06      	ldr	r3, [pc, #24]	; (800055c <main+0x74>)
  8000544:	681b      	ldr	r3, [r3, #0]
  8000546:	3301      	adds	r3, #1
  8000548:	4a04      	ldr	r2, [pc, #16]	; (800055c <main+0x74>)
  800054a:	6013      	str	r3, [r2, #0]
-		  setTimer0(10);
- 800054c:	200a      	movs	r0, #10
+	 		  setTimer0(100);
+ 800054c:	2064      	movs	r0, #100	; 0x64
  800054e:	f000 f8f7 	bl	8000740 <setTimer0>
 	  if(timer0_flag == 1){
  8000552:	e7d9      	b.n	8000508 <main+0x20>
@@ -761,9 +761,9 @@ static void MX_TIM2_Init(void)
  80005f8:	4b1d      	ldr	r3, [pc, #116]	; (8000670 <MX_TIM2_Init+0x94>)
  80005fa:	f04f 4280 	mov.w	r2, #1073741824	; 0x40000000
  80005fe:	601a      	str	r2, [r3, #0]
-  htim2.Init.Prescaler = 7999;
+  htim2.Init.Prescaler = 799;
  8000600:	4b1b      	ldr	r3, [pc, #108]	; (8000670 <MX_TIM2_Init+0x94>)
- 8000602:	f641 723f 	movw	r2, #7999	; 0x1f3f
+ 8000602:	f240 321f 	movw	r2, #799	; 0x31f
  8000606:	605a      	str	r2, [r3, #4]
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
  8000608:	4b19      	ldr	r3, [pc, #100]	; (8000670 <MX_TIM2_Init+0x94>)
