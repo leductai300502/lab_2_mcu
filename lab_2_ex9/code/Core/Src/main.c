@@ -129,7 +129,6 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   setTimer0(50);
-//  set_ULN();
   while (1)
   {
     /* USER CODE END WHILE */

@@ -65,44 +65,54 @@ static void MX_TIM2_Init(void);
   */
 void display7SEG(int num){
 	if(num == 0){
-	GPIOB->ODR = 0xC0; //Displaying 0
+	GPIOB->ODR = 0x0040; //Displaying 0
 	}
 	if(num == 1){
-	GPIOB->ODR = 0xF9; //Displaying 1
+	GPIOB->ODR = 0x00F9; //Displaying 1
 	}
 	if(num == 2){
-	GPIOB->ODR = 0xA4; //Displaying 2
+	GPIOB->ODR = 0x00A4; //Displaying 2
 	}
 	if(num == 3){
-	GPIOB->ODR = 0xB0; //Displaying 3
+	GPIOB->ODR = 0x00B0; //Displaying 3
 	}
 	if(num == 4){
-	GPIOB->ODR = 0x99; //Displaying 4
+	GPIOB->ODR = 0x0099; //Displaying 4
 	}
 	if(num == 5){
-	GPIOB->ODR = 0x92; //Displaying 5
+	GPIOB->ODR = 0x0092; //Displaying 5
 	}
 	if(num == 6){
-	GPIOB->ODR = 0x82; //Displaying 6
+	GPIOB->ODR = 0x0082; //Displaying 6
 	}
 	if(num == 7){
-	GPIOB->ODR = 0xF8; //Displaying 7
+	GPIOB->ODR = 0x00F8; //Displaying 7
 	}
 	if(num == 8){
-	GPIOB->ODR = 0x80; //Displaying 8
+	GPIOB->ODR = 0x0080; //Displaying 8
 	}
 	if(num == 9){
-	GPIOB->ODR = 0x90; //Displaying 9
+	GPIOB->ODR = 0x0090; //Displaying 9
 	}
 }
- const int MAX_LED = 4;
- int index_led = 0;
- int led_buffer[4] = {1 , 2 , 3 , 4};
+//----------------------------------
+int hour = 15 , minute = 8 , second = 50;
+int led_buffer[4] = {1 , 2 , 3 , 4};
+int index_led =0;
+int MAX_LED =4;
+void updateClockBuffer(){
+
+    	 led_buffer[0] = hour/10;
+    	 led_buffer[1] = hour%10;
+
+         led_buffer[2]= minute/10;
+         led_buffer[3]= minute%10;
+}
+//--------------------------
 void update7SEG ( int index ){
  switch ( index ) {
  case 0:
  // Display the first 7 SEG with led_buffer [0]
-	 HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, RESET);
 	 HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, SET);
 	 HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, SET);
 	 HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, SET);
@@ -111,7 +121,6 @@ void update7SEG ( int index ){
  break ;
  case 1:
  // Display the second 7 SEG with led_buffer [1]
-	 HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, SET);
 	 HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, RESET);
 	 HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, SET);
 	 HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, SET);
@@ -120,7 +129,6 @@ void update7SEG ( int index ){
  break ;
  case 2:
  // Display the third 7 SEG with led_buffer [2]
-	 HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, RESET);
 	 HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, SET);
 	 HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, RESET);
 	 HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, SET);
@@ -129,7 +137,6 @@ void update7SEG ( int index ){
  break ;
  case 3:
  // Display the forth 7 SEG with led_buffer [3]
-	 HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, SET);
 	 HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, SET);
 	 HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, SET);
 	 HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, RESET);
@@ -175,15 +182,27 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-	  if(timer0_flag == 1){
-		  if(index_led >= MAX_LED){
-			  index_led = 0;
-		  }
-		  update7SEG(index_led);
-		  HAL_GPIO_TogglePin(DOT_GPIO_Port, DOT_Pin);
-		  index_led++;
-		  setTimer0(1000);
-	  }
+	  if( timer0_flag == 1) {
+	  	  	  setTimer0(500);
+	  	  	  HAL_GPIO_TogglePin( LED_RED_GPIO_Port , LED_RED_Pin ) ;
+	  	  	  second ++;
+	  	  	  if ( second >= 60) {
+	  	  		  second = 0;
+	  	  		  minute ++;
+	  	  	  }
+	  	  	  if( minute >= 60) {
+	  	  		  minute = 0;
+	  	  		  hour ++;
+	  	  	  }
+	  	  	  if( hour >=24) {
+	  	  		  hour = 0;
+	  	  	  }
+	  	  	  updateClockBuffer () ;
+	  	  	  update7SEG(index_led);
+	  	  	  index_led++;
+	  	  	  if(index_led >= MAX_LED) index_led=0;
+	  	  	  HAL_GPIO_TogglePin(DOT_GPIO_Port, DOT_Pin);
+	  	  	  }
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
